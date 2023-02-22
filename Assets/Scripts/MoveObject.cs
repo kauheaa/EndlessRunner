@@ -1,0 +1,56 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MoveObject : MonoBehaviour
+{
+    public GameObject explosion;
+    public float moveSpeed = 1f;
+    public float ultimateSpeed = 1f;
+    private float[] offset = new float[3] {-3.3f, 0f, 3.3f};
+    private bool playerDead;
+    public CanvasController canvasController;
+
+    void Start()
+    {
+        moveSpeed = moveSpeed * -1 * ultimateSpeed;
+    }
+
+IEnumerator GameOver()
+{
+    Debug.Log("Game Over");
+    yield return new WaitForSeconds(3);
+    canvasController.GameOver();
+    }
+
+void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            if (!playerDead)
+            {
+            playerDead = true;
+            Destroy(other.gameObject);
+            Instantiate(explosion, transform.position, transform.rotation);
+            StartCoroutine(GameOver());
+            }
+
+        }
+    }
+ 
+    // Update is called once per frame
+    void Update()
+    {
+        ultimateSpeed = canvasController.ultimateSpeed;
+        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * ultimateSpeed);
+
+        if (transform.position.x > 15)
+        {
+            int randomIndex = Random.Range(0, 3);
+            float newZPosition = offset[randomIndex];
+            transform.position = new Vector3(-220f, 0f, newZPosition);
+        }
+
+    }
+}
+
