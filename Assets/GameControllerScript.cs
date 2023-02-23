@@ -15,8 +15,9 @@ public class GameControllerScript : MonoBehaviour
     public Text finalScoreDisplay;
     public Text highscoreDisplay;
 
+    public int gems;
     public int score;
-    public int highscore = 0;
+    public int highscore;
     public float ultimateSpeed = 0f; 
 
     public GameObject gameOverScreen;
@@ -25,6 +26,8 @@ public class GameControllerScript : MonoBehaviour
     {
         spawner.gameObject.SetActive(true);
         ultimateSpeed = 1f;
+        score = 0;
+        scoreDisplay.text = score.ToString();
     }
     public void ResetScene()
     {
@@ -46,12 +49,19 @@ public class GameControllerScript : MonoBehaviour
     {
         score += 1;
         scoreDisplay.text = score.ToString();
+        if (highscore < score)
+        {
+            PlayerPrefs.SetInt("highscore", score);
+        }
+        highscore = PlayerPrefs.GetInt("highscore", 0);
+
     }
 
     // Start is called before the first frame update
     private void Start()
     {
         score = 0;
+        highscore = PlayerPrefs.GetInt("highscore", 0);
         scoreDisplay.text = score.ToString();
     }
 

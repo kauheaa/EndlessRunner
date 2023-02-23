@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Instantiate : MonoBehaviour
 {
+    public GameControllerScript gc;
     public GameObject collectable;
     private float[] zOffset = new float[3] { -3.3f, 0f, 3.3f };
     private float[] yOffset = new float[2] { 0.5f, 2.5f };
     private float spawnCollisionCheckRadius = 3;
-    public int gems = 0;
     private Vector3 spawnPoint;
 
     // Start is called before the first frame update
@@ -33,8 +33,6 @@ public class Instantiate : MonoBehaviour
         if (!Physics.CheckSphere(spawnPoint, spawnCollisionCheckRadius))
         {
             Instantiate(collectable, spawnPoint, transform.rotation);
-            gems++;
-            Debug.Log("Gem spawned" + gems);
         }
         
             
