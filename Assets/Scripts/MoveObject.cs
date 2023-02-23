@@ -9,7 +9,7 @@ public class MoveObject : MonoBehaviour
     public float ultimateSpeed = 1f;
     private float[] offset = new float[3] {-3.3f, 0f, 3.3f};
     private bool playerDead;
-    public CanvasController canvasController;
+    public GameControllerScript gc;
 
     void Start()
     {
@@ -18,9 +18,9 @@ public class MoveObject : MonoBehaviour
 
 IEnumerator GameOver()
 {
+    yield return new WaitForSeconds(1);
+    gc.GameOver();
     Debug.Log("Game Over");
-    yield return new WaitForSeconds(3);
-    canvasController.GameOver();
     }
 
 void OnTriggerEnter(Collider other)
@@ -41,7 +41,7 @@ void OnTriggerEnter(Collider other)
     // Update is called once per frame
     void Update()
     {
-        ultimateSpeed = canvasController.ultimateSpeed;
+        ultimateSpeed = gc.ultimateSpeed;
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * ultimateSpeed);
 
         if (transform.position.x > 15)

@@ -30,15 +30,14 @@ public class Instantiate : MonoBehaviour
     public void SpawnDimangi()
     {
         SetSpawnPoint();
-
         if (!Physics.CheckSphere(spawnPoint, spawnCollisionCheckRadius))
         {
             Instantiate(collectable, spawnPoint, transform.rotation);
+            gems++;
+            Debug.Log("Gem spawned" + gems);
         }
-        else
-        {
-            SetSpawnPoint();
-        }
+        
+            
     }
 
     IEnumerator CollectableCoroutine()
@@ -47,8 +46,6 @@ public class Instantiate : MonoBehaviour
         {
             yield return new WaitForSeconds(2f);
             SpawnDimangi();
-            gems++;
-            Debug.Log("Gem spawned" + gems);
         }
     }
 

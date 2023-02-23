@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 1f;
-    public float jumpForce = 1f;
     public Rigidbody rb;
+    [SerializeField] float moveSpeed = 1f;
+    [SerializeField] float jumpForce = 1f;
+    
+    [SerializeField] Transform groundCheck;
+    [SerializeField] LayerMask ground;
+
     public bool isGrounded = false;
-    public CanvasController canvasController;
+    public GameControllerScript gc;
     // Start is called before the first frame update
     void Start()
     {
-        isGrounded = true;
+        rb = GetComponent<Rigidbody>();
     }
 
-    void OnCollisionEnter(Collider other)
+    // return boolean "true" if layer mask called "ground" is on .1f radius from the position of shpere called "groundCheck".
+    bool IsGrounded()
     {
-        if (other.gameObject.tag == "Ground")
-        {
-            isGrounded = true;
-            Debug.Log("Grounded");
-        }
+        return Physics.CheckSphere(groundCheck.position, .1f, ground);
     }
 
     // Update is called once per frame
@@ -44,14 +45,10 @@ public class Player : MonoBehaviour
                 transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
             }
             // character moves to direction when key is pressed
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
             {
                 rb.AddForce(transform.up * jumpForce);
-                isGrounded = false;
-            Debug.Log("Not Grounded");
-        }
-
-        
+            }
 
         // rajoittaa hahmon liikkeen tien reunoihin
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -10f, 3f), // x askeli suluissa

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveGround : MonoBehaviour
 {
     public float moveSpeed;
-    public CanvasController canvasController;
+    public GameControllerScript gc;
     public float ultimateSpeed = 1f;
 
     void Start()
@@ -17,7 +17,7 @@ public class MoveGround : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ultimateSpeed = canvasController.ultimateSpeed;
+        ultimateSpeed = gc.ultimateSpeed;
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * ultimateSpeed);
 
         if (transform.position.x > 20)

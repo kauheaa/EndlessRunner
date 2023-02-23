@@ -6,12 +6,12 @@ public class Score : MonoBehaviour
 {
     public int score = 0;
     private bool collected = false;
-    public CanvasController canvasController;
+    public GameControllerScript gc;
     public GameObject gemExplosion;
 
     public void AddScore()
     {
-        canvasController.scoreUpdate();
+        gc.scoreUpdate();
     }
 
     void Start()
