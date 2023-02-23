@@ -11,9 +11,12 @@ public class Instantiate : MonoBehaviour
     private float spawnCollisionCheckRadius = 3;
     private Vector3 spawnPoint;
 
+    public int gems;
+
     // Start is called before the first frame update
     void Start()
     {
+        gems = 0;
         SpawnDimangi();
         StartCoroutine(CollectableCoroutine());
     }
@@ -33,6 +36,7 @@ public class Instantiate : MonoBehaviour
         if (!Physics.CheckSphere(spawnPoint, spawnCollisionCheckRadius))
         {
             Instantiate(collectable, spawnPoint, transform.rotation);
+            gems++;
         }
         
             

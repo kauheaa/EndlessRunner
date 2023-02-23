@@ -15,7 +15,6 @@ public class GameControllerScript : MonoBehaviour
     public Text finalScoreDisplay;
     public Text highscoreDisplay;
 
-    public int gems;
     public int score;
     public int highscore;
     public float ultimateSpeed = 0f; 
@@ -47,7 +46,8 @@ public class GameControllerScript : MonoBehaviour
 
     public void scoreUpdate()
     {
-        score += 1;
+        score ++;
+        Debug.Log("score +1");
         scoreDisplay.text = score.ToString();
         if (highscore < score)
         {
