@@ -68,7 +68,7 @@ Transform:
   - {fileID: 1029273175665443660}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &3614149548075021088
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -147,13 +147,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3614149548075021119}
   moveSpeed: 10
-  jumpForce: 400
+  jumpForce: 900
   groundCheck: {fileID: 1029273175665443660}
   ground:
     serializedVersion: 2
     m_Bits: 64
   isGrounded: 0
-  canvasController: {fileID: 0}
+  gc: {fileID: 0}
 --- !u!54 &3614149548075021119
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &3614149548075021116
 BoxCollider:
@@ -195,8 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed6d7aab529613f429d854365c1c8107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  canvasController: {fileID: 0}
+  gc: {fileID: 0}
   gemExplosion: {fileID: 2549734327186213344, guid: e9d513c2decb1e041808d2f32bb12270, type: 3}
 --- !u!1001 &3614149549897280984
 PrefabInstance:

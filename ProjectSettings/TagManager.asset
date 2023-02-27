@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectable
   - Ground
+  - Gem
   layers:
   - Default
   - TransparentFX
