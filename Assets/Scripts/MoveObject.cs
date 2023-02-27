@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveObject : MonoBehaviour
 {
-    public GameObject explosion;
+    public GameObject playerExplosion;
     public float moveSpeed = 1f;
     public float ultimateSpeed = 1f;
     private float[] offset = new float[3] {-3.3f, 0f, 3.3f};
@@ -30,9 +30,12 @@ void OnTriggerEnter(Collider other)
             if (!playerDead)
             {
             playerDead = true;
-            Destroy(other.gameObject);
-            Instantiate(explosion, transform.position, transform.rotation);
+            other.gameObject.SetActive(false);
+            GameObject explosion = Instantiate(playerExplosion, transform.position, transform.rotation);
+            Debug.Log("Dead");
+            Destroy(explosion, 1);
             StartCoroutine(GameOver());
+            playerDead = false;
             }
 
         }

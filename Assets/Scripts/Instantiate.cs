@@ -1,45 +1,43 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Instantiate : MonoBehaviour
 {
     public GameControllerScript gc;
     public GameObject collectable;
+
     private float[] zOffset = new float[3] { -3.3f, 0f, 3.3f };
     private float[] yOffset = new float[2] { 0.5f, 2.5f };
     private float spawnCollisionCheckRadius = 3;
-    private Vector3 spawnPoint;
-
+    private Vector3 dimangiSpawnPoint;
     public int gems;
 
-    // Start is called before the first frame update
-    void Start()
+
+    public void StartSpawning()
     {
         gems = 0;
         SpawnDimangi();
         StartCoroutine(CollectableCoroutine());
     }
 
-    public void SetSpawnPoint()
+    public void SetDimangiSpawnPoint()
     {
         int randomHorizontal = Random.Range(0, 3);
         int randomVertical = Random.Range(0, 2);
         float newZPosition = zOffset[randomHorizontal];
         float newYPosition = yOffset[randomVertical];
-        spawnPoint = new Vector3(-100f, newYPosition, newZPosition);
+        dimangiSpawnPoint = new Vector3(-100f, newYPosition, newZPosition);
     }
+
 
     public void SpawnDimangi()
     {
-        SetSpawnPoint();
-        if (!Physics.CheckSphere(spawnPoint, spawnCollisionCheckRadius))
+        SetDimangiSpawnPoint();
+        if (!Physics.CheckSphere(dimangiSpawnPoint, spawnCollisionCheckRadius))
         {
-            Instantiate(collectable, spawnPoint, transform.rotation);
+            Instantiate(collectable, dimangiSpawnPoint, transform.rotation);
             gems++;
-        }
-        
-            
+        }    
     }
 
     IEnumerator CollectableCoroutine()

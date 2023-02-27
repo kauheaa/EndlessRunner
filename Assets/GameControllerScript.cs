@@ -1,32 +1,53 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using System.Collections;
-using System;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class GameControllerScript : MonoBehaviour
 {
     public GameObject spawner;
     public GameObject player;
+    public GameObject cows;
+    private GameObject[] gems;
+
+    public Component[] scriptsInCows;
+    public Instantiate spawn;
+
+    public Vector3 playerPos;
 
     public Text scoreDisplay;
     public Text finalScoreDisplay;
     public Text highscoreDisplay;
 
+
     public int score;
     public int highscore;
-    public float ultimateSpeed = 0f; 
+    public int restart;
+    public float ultimateSpeed = 0f;
 
     public GameObject gameOverScreen;
+    public GameObject startMenuScreen;
 
     public void StartGame()
     {
-        spawner.gameObject.SetActive(true);
-        ultimateSpeed = 1f;
+        startMenuScreen.SetActive(false);
+        gameOverScreen.SetActive(false);
+        ResetCows();
+        player.transform.position = playerPos;
+        player.SetActive(true);
+        spawner.SetActive(true);
+        spawn.StartSpawning();
+        ultimateSpeed = 1;
         score = 0;
         scoreDisplay.text = score.ToString();
+    }
+
+    public void ResetCows()
+    {
+        scriptsInCows = cows.GetComponentsInChildren<PositionLevelObjects>();
+        foreach (PositionLevelObjects cowScript in scriptsInCows)
+        {
+            cowScript.ResetCows();
+        }
     }
     public void ResetScene()
     {
@@ -39,9 +60,19 @@ public class GameControllerScript : MonoBehaviour
         gameOverScreen.SetActive(true);
         finalScoreDisplay.text = score.ToString();
         highscoreDisplay.text = highscore.ToString();
-        //ResetScene();
 
-        //gameOver.gameObject.SetActive(true);
+        gems = GameObject.FindGameObjectsWithTag("Gem");
+        foreach(GameObject gem in gems)
+        {
+            Destroy(gem);
+        }
+
+    }
+
+    public void OpenMainMenu()
+    {
+        gameOverScreen.SetActive(false);
+        startMenuScreen.SetActive(true);
     }
 
     public void scoreUpdate()
@@ -60,7 +91,13 @@ public class GameControllerScript : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        playerPos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+        spawn = spawner.GetComponent<Instantiate>();
+        player.SetActive(false);
+        spawner.SetActive(false);
+        ultimateSpeed = 0;
         score = 0;
+        startMenuScreen.SetActive(true);
         highscore = PlayerPrefs.GetInt("highscore", 0);
         scoreDisplay.text = score.ToString();
     }
@@ -68,6 +105,6 @@ public class GameControllerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
