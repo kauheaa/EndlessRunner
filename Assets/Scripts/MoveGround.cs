@@ -20,7 +20,7 @@ public class MoveGround : MonoBehaviour
         ultimateSpeed = gc.ultimateSpeed;
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * ultimateSpeed);
 
-        if (transform.position.x > 20)
+        if (transform.position.x >= 20)
         {
             transform.localPosition = new Vector3(-220f, 0f, 0f);
         }

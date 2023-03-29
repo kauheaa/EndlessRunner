@@ -10415,6 +10415,14 @@ PrefabInstance:
       propertyPath: gc
       value: 
       objectReference: {fileID: 797098905}
+    - target: {fileID: 3614149548075021118, guid: ba17f116b777a0644a412ca8aac15ef6, type: 3}
+      propertyPath: moveSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614149548075021119, guid: ba17f116b777a0644a412ca8aac15ef6, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba17f116b777a0644a412ca8aac15ef6, type: 3}
 --- !u!1001 &5686263707495350916

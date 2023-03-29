@@ -36,7 +36,7 @@ public class GameControllerScript : MonoBehaviour
         player.SetActive(true);
         spawner.SetActive(true);
         spawn.StartSpawning();
-        ultimateSpeed = 1;
+        ultimateSpeed = 2;
         score = 0;
         scoreDisplay.text = score.ToString();
     }
@@ -78,6 +78,7 @@ public class GameControllerScript : MonoBehaviour
     public void scoreUpdate()
     {
         score ++;
+        ultimateSpeed += 0.1f;
         Debug.Log("score +1");
         scoreDisplay.text = score.ToString();
         if (highscore < score)
